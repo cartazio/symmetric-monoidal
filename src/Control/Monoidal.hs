@@ -91,6 +91,11 @@ data ChooseH a b c where
   CRight :: ChooseH a b b
 
 newtype Choice a b = MkC (forall res . ChooseH a b res -> res )
+{-
+see https://www.reddit.com/r/haskell/comments/4aju8f/simple_example_of_emulating_copattern_matching_in/
+for more examples of this style of copattern matching encoding in haskell
+(its great for coinductive descriptions)
+-}
 
 instance ChoiceCategory (->) Choice where
   chooseRight (MkC f) = f CRight
